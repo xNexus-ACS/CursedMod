@@ -30,12 +30,6 @@ public class CursedRagdoll
 
     public BasicRagdoll Base { get; }
 
-    public bool AutoCleanUp
-    {
-        get => !Base._cleanedUp;
-        set => Base._cleanedUp = !value;
-    }
-
     public RoleTypeId Role => Base.Info.RoleType;
 
     public CursedPlayer Owner => CursedPlayer.Get(Base.Info.OwnerHub);
@@ -76,8 +70,6 @@ public class CursedRagdoll
     public static CursedRagdoll Get(BasicRagdoll basicRagdoll) => Dictionary.ContainsKey(basicRagdoll) ? Dictionary[basicRagdoll] : new CursedRagdoll(basicRagdoll);
 
     public static IEnumerable<CursedRagdoll> Get(CursedPlayer player) => Collection.Where(ragdoll => player == ragdoll.Owner);
-
-    public void CleanUp() => Base.OnCleanup();
 
     public void Spawn() => NetworkServer.Spawn(Base.gameObject);
     
